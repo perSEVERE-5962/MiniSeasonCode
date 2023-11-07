@@ -7,18 +7,23 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Elevator extends SubsystemBase {
-
-  private CANSparkMax m_motor;
-  /** Creates a new ExampleSubsystem. */
+  private CANSparkMax mElevatorMotor;
+  /** Creates a new Elevator. */
   public Elevator() {
-    m_motor = new CANSparkMax(62, MotorType.kBrushed);
+    mElevatorMotor = new CANSparkMax(Constants.kElevatorMotorId, MotorType.kBrushed);
+    //mElevatorMotor.setSecondaryCurrentLimit(40);
   }
 
-  public void move(int volts) {
-    m_motor.setVoltage(volts);
+  public void move(double speed) {
+    mElevatorMotor.set(speed);
   }
+
+  /*@Override
+  public void periodic() {
+
+  }*/
 }

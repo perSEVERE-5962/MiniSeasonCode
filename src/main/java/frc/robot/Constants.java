@@ -16,4 +16,8 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
+
+  public static final int kElevatorMotorId = 62;
+  public static final int kShooterMotorId = 22;
+  public static final double kShooterLowerLimit = 5600;
 }

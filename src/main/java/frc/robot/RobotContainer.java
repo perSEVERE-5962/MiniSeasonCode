@@ -5,8 +5,8 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.MoveElevator;
-import frc.robot.subsystems.Elevator;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -18,16 +18,23 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final Elevator m_elevator = new Elevator();
+  private final Elevator mElevator = new Elevator();
+  private final Shooter mShooter = new Shooter();
+  private DisplayMovementOnShuffleboard mShuffleboard;
 
+  // No controller will be used
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
+    //new Trigger(m_exampleSubsystem::exampleCondition)
+    //    .onTrue(new ExampleCommand(m_exampleSubsystem));
 
     // Configure the trigger bindings
+    mShuffleboard = new DisplayMovementOnShuffleboard();
     configureBindings();
   }
 
@@ -43,8 +50,8 @@ public class RobotContainer {
   private void configureBindings() {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    m_driverController.b().whileTrue(new MoveElevator(m_elevator, 8));
-    m_driverController.a().whileTrue(new MoveElevator(m_elevator, -8));
+    m_driverController.leftBumper().toggleOnTrue(new MoveElevator(mElevator));
+    m_driverController.rightBumper().toggleOnTrue(new MoveShooter(mShooter));
   }
 
   /**
@@ -54,6 +61,6 @@ public class RobotContainer {
    */
   /*public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return (new FireBall(mElevator, mShooter));
   }*/
 }
