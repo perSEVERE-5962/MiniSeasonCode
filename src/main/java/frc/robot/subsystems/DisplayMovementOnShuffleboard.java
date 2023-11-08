@@ -43,12 +43,12 @@ public class DisplayMovementOnShuffleboard extends SubsystemBase {
     double[] tagPositions = DetectAprilTags.getAprilTagPos(0);
     double[] tagAngles = DetectAprilTags.getAprilTagRot(0);
     if (tagPositions != null && tagAngles != null) {
-      entries[0].setBoolean(tagPositions[2] > 2);
-      entries[1].setBoolean(tagPositions[0] < -0.2);
-      entries[2].setBoolean(tagPositions[0] > 0.2);
-      entries[3].setBoolean(tagPositions[2] < 1.5);
-      entries[4].setBoolean(tagAngles[1] < -0.2);
-      entries[5].setBoolean(tagAngles[1] > 0.2);
+      entries[0].setBoolean(tagPositions[2] > 1.8); // Up
+      entries[1].setBoolean(tagPositions[0] < 0.03); // Left
+      entries[2].setBoolean(tagPositions[0] > 0.04); // Right
+      entries[3].setBoolean(tagPositions[2] < 1.7); // Down
+      entries[4].setBoolean(tagAngles[1] < -0.01); // Look left
+      entries[5].setBoolean(tagAngles[1] > 0.01); // Look right
     }
   }
 }
